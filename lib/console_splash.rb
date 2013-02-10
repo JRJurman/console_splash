@@ -12,14 +12,14 @@ class Console_Splash
   def initialize(lines=nil, columns=nil)
     @lines = lines ? lines : `stty size`.chomp.split()[0].to_i
     @columns = columns ? columns : `stty size`.chomp.split()[1].to_i
-    @screen = Array.new(@lines, "#{' '*@columns}")
+    @screen = Array.new(@lines, "#{' '*(@columns-1)}\n")
   end
 
   #  Draw a continuous pattern on the top and bottom of the screen
   def write_top_pattern(pattern="=")
     strSize = rip_color(pattern).size
     line_write(0, "#{pattern*(@columns/strSize)}\n")
-    line_write(-1, "#{pattern*(@columns/strSize)}")
+    line_write(-1, "#{pattern*(@columns/strSize)} ")
   end
 
   #  Draw a continuous pattern on the sides of the screen
@@ -27,7 +27,7 @@ class Console_Splash
     count = 1
     @screen[(1..-2)].each do |line|
       line_write(count, pattern)
-      line_write(count, pattern, @columns-rip_color(pattern).size)
+      line_write(count, pattern, @columns-(rip_color(pattern).size))
       count += 1
     end
   end
@@ -79,4 +79,3 @@ class Console_Splash
   end
 
 end
-
