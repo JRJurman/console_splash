@@ -9,8 +9,6 @@ To install console_splash, simply install using rubygems
 
     gem install console_splash
 
-their are no dependencies, so you should be good.
-
 == Usage
 
 To use, first require the gem, and create a new splash object
@@ -51,4 +49,8 @@ Finally, call the .splash method to print your new splash screen!
 
     splash.splash
 
-You're in charge of holding it there, so call the gets method, or use the sleep method to hold the screen in place.
+You're in charge of holding it there, so call the gets method, or use the sleep method to hold the screen in place. You'll also want to clear the screen to remove previous console artifacts.
+
+    `clear`
+    sleep(3) #=> holds the command line in place
+    gets() #=> waits until user input
