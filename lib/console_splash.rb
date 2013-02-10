@@ -18,8 +18,8 @@ class Console_Splash
   #  Draw a continuous pattern on the top and bottom of the screen
   def write_top_pattern(pattern="=")
     strSize = rip_color(pattern).size
-    line_write(0, "#{pattern*(@columns/strSize)}\n")
-    line_write(-1, "#{pattern*(@columns/strSize)} ")
+    line_write(0, "#{pattern*((@columns-1)/strSize)}\n")
+    line_write(-1, "#{pattern*((@columns-1)/strSize)} ")
   end
 
   #  Draw a continuous pattern on the sides of the screen
@@ -27,7 +27,7 @@ class Console_Splash
     count = 1
     @screen[(1..-2)].each do |line|
       line_write(count, pattern)
-      line_write(count, pattern, @columns-(rip_color(pattern).size))
+      line_write(count, pattern, @columns-(rip_color(pattern).size+1))
       count += 1
     end
   end
@@ -69,9 +69,9 @@ class Console_Splash
       f = text.index("\e[0m")
       realString = text[(i)..(f-1)]
       res = ""
-      res += text[0..(i-9)] if i != 9
+      #res += text[0..(i-9)] if i != 9
       res += realString
-      res += text[(f+4)..-1] if f != text.size() - 4
+      #res += text[(f+4)..-1] if f != text.size() - 4
       res
     else
       text
