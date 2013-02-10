@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.summary       = "Splash screen gem for command line ruby programs"
   s.email         = "j.r.jurman@gmail.com"
   s.homepage      = "https://github.com/JRJurman/console_splash"
-  s.required_path = 'lib'
+  s.files         = ["lib/console_splash"]
   s.platform      = Gem::Platform::CURRENT
   s.licenses      = ["MIT"]
 end
