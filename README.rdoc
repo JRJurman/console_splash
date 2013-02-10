@@ -1,19 +1,54 @@
 = console_splash
 
-Description goes here.
+Console Splash is a ruby gem that allows you to have a vim-esq splash screen before
+your ruby program. It right now does not support color (but is planning on it in the near future using colorize). It uses the command line tool stty to get the size of the console, but you can define your own console size.
 
-== Contributing to console_splash
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
-* Fork the project.
-* Start a feature/bugfix branch.
-* Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+== Setup
 
-== Copyright
+To install console_splash, simply install using rubygems
 
-Copyright (c) 2013 Jesse Jurman. See LICENSE.txt for
-further details.
+    gem install console_splash
 
+their are no dependencies, so you should be good.
+
+== Usage
+
+To use, first require the gem, and create a new splash object
+
+    require "console_splash"
+    splash = Console_Splash.new()
+
+The initializer can take in the number of lines and number of columns, but will autogenerate them with stty otherwise.
+
+    splash = Console_Splash.new(35, 88) #=> 35 lines, 88 columns
+
+After that, there are a series of methods you can use to setup the splash screen.
+Console_Splash.write_info takes in a name, author, and version to display program information.
+
+    splash.write_info("Console_Splash", "JRJurman", "0.3.0")
+
+You can also insert your own lines into Console_Splash using the write_center method, which takes in a line number, and text (the line number can be negative for going from the bottom up).
+
+    splash.write_center(-3, "Splash Screens are awesome")
+
+If you want to add a border you can use the write_horizontal_pattern and write_vertical_pattern.
+    
+    splash.write_horizontal_pattern("=")
+    splash.write_vertical_pattern("|")
+
+Or, if you want more control, you can use the write_top_pattern, write_bottom_pattern, write_left_pattern, and write_right_pattern
+
+    splash.write_top_pattern("^")
+    splash.write_bottom_pattern("v")
+    splash.write_left_pattern("<")
+    splash.write_right_pattern(">")
+
+The write_*_pattern methods can also take more than one character!
+
+    splash.write_horizontal_pattern("v^")
+
+Finally, call the .splash method to print your new splash screen!
+
+    splash.splash
+
+You're in charge of holding it there, so call the gets method, or use the sleep method to hold the screen in place.
