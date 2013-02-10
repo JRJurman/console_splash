@@ -21,9 +21,9 @@ The initializer can take in the number of lines and number of columns, but will 
     splash = Console_Splash.new(35, 88) #=> 35 lines, 88 columns
 
 After that, there are a series of methods you can use to setup the splash screen.
-Console_Splash.write_info takes in a name, author, and version to display program information.
+Console_Splash.write_header takes in a name, author, and version to display program information.
 
-    splash.write_info("Console_Splash", "JRJurman", "0.3.0")
+    splash.write_header("Console_Splash", "JRJurman", "0.3.0")
 
 You can also insert your own lines into Console_Splash using the write_center method, which takes in a line number, and text (the line number can be negative for going from the bottom up).
 
