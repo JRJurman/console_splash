@@ -1,8 +1,6 @@
 # console_splash.rb 
 # created by Jesse Jurman
 
-require 'colorize'
-
 class Console_Splash
 
   attr_accessor :screen, :lines, :columns
@@ -10,24 +8,50 @@ class Console_Splash
   #  Create a new screen Array with a given console size 
   #  (will be auto-generated otherwise using `stty size`)
   def initialize(lines=nil, columns=nil)
-    @lines = lines ? lines : `stty size`.chomp.split()[0].to_i
+    @lines = lines ? lines : (`stty size`.chomp.split()[0].to_i - 1)
     @columns = columns ? columns : `stty size`.chomp.split()[1].to_i
-    @screen = Array.new(@lines, "#{' '*(@columns-1)}\n")
+    @screen = Array.new(@lines, "#{' '*(@columns)}\n")
+    @screen[-1] = "#{' '*(@columns)}"
   end
 
   #  Draw a continuous pattern on the top and bottom of the screen
-  def write_top_pattern(pattern="=")
-    strSize = rip_color(pattern).size
-    line_write(0, "#{pattern*((@columns-1)/strSize)}\n")
-    line_write(-1, "#{pattern*((@columns-1)/strSize)} ")
+  def write_horizontal_pattern(pattern="=")
+    write_top_pattern(pattern)
+    write_bottom_pattern(pattern)
   end
 
   #  Draw a continuous pattern on the sides of the screen
-  def write_side_pattern(pattern="=")
+  def write_vertical_pattern(pattern="=")
+    write_right_pattern(pattern)
+    write_left_pattern(pattern)
+  end
+
+  #  Draw a continuous pattern on the top of the screen
+  def write_top_pattern(pattern="=")
+    strSize = pattern.size
+    line_write(0, "#{pattern*((@columns-1)/strSize)}")
+  end
+
+  #  Draw a continuous pattern on the bottom of the screen
+  def write_bottom_pattern(pattern="=")
+    strSize = pattern.size
+    line_write(-1, "#{pattern*((@columns-1)/strSize)}")
+  end
+
+  #  Draw a continuous pattern on the right side of the screen
+  def write_right_pattern(pattern="=")
+    count = 1
+    @screen[(1..-2)].each do |line|
+      line_write(count, pattern, (@columns-(pattern.size+1)))
+      count += 1
+    end
+  end
+
+  #  Draw a continuous pattern on the left side of the screen
+  def write_left_pattern(pattern="=")
     count = 1
     @screen[(1..-2)].each do |line|
       line_write(count, pattern)
-      line_write(count, pattern, @columns-(rip_color(pattern).size+1))
       count += 1
     end
   end
@@ -43,7 +67,7 @@ class Console_Splash
 
   #  Write to the center of the line
   def center_write(line, text)
-    strSize = rip_color(text).size
+    strSize = text.size
     buffer = (@columns - strSize)/2.0
     line_write(line, text, buffer)
   end
@@ -60,22 +84,6 @@ class Console_Splash
   #  prompt in focus (i.e. gets))
   def splash
     @screen.each { |line| print line }
-  end
-
-  #  Get string out of colorized_string
-  def rip_color(text)
-    if text.include?("\e")
-      i = text.index('m')
-      f = text.index("\e[0m")
-      realString = text[(i)..(f-1)]
-      res = ""
-      #res += text[0..(i-9)] if i != 9
-      res += realString
-      #res += text[(f+4)..-1] if f != text.size() - 4
-      res
-    else
-      text
-    end
   end
 
 end
