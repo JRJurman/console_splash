@@ -1,7 +1,7 @@
 # console_splash.rb 
 # created by Jesse Jurman
 
-class Console_Splash
+class ConsoleSplash
 
   attr_accessor :screen, :lines, :columns
 
