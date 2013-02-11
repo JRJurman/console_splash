@@ -18,7 +18,7 @@ To use, first require the gem, and create a new splash object
 
 The initializer can take in the number of lines and number of columns, but will autogenerate them with stty otherwise.
 
-    splash = Console_Splash.new(35, 88) #=> 35 lines, 88 columns
+    splash = ConsoleSplash.new(35, 88) #=> 35 lines, 88 columns
 
 After that, there are a series of methods you can use to setup the splash screen.
 Console_Splash.write_header takes in a name, author, and version to display program information.
