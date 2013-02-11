@@ -14,18 +14,17 @@ To install console_splash, simply install using rubygems
 To use, first require the gem, and create a new splash object
 
     require "console_splash"
-    splash = Console_Splash.new()
+    splash = ConsoleSplash.new()
 
 The initializer can take in the number of lines and number of columns, but will autogenerate them with stty otherwise.
 
     splash = ConsoleSplash.new(35, 88) #=> 35 lines, 88 columns
 
-After that, there are a series of methods you can use to setup the splash screen.
-Console_Splash.write_header takes in a name, author, and version to display program information.
+After that, there are a series of methods you can use to setup the splash screen. .write_header takes in a name, author, and version to display program information.
 
-    splash.write_header("Console_Splash", "JRJurman", "0.3.0")
+    splash.write_header("ConsoleSplash", "JRJurman", "0.3.0")
 
-You can also insert your own lines into Console_Splash using the write_center method, which takes in a line number, and text (the line number can be negative for going from the bottom up).
+You can also insert your own lines into ConsoleSplash using the write_center method, which takes in a line number, and text (the line number can be negative for going from the bottom up).
 
     splash.write_center(-3, "Splash Screens are awesome")
 
