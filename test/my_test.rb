@@ -4,7 +4,7 @@
 
 require '../lib/console_splash.rb'
 
-splsh = Console_Splash.new()
+splsh = ConsoleSplash.new()
 splsh.write_vertical_pattern("^_")
 splsh.write_horizontal_pattern("<_")
 splsh.write_center(-3, "Splash Screens are most Excellent!")
