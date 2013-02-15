@@ -2,7 +2,7 @@
 # created by Jesse Jurman
 
 require 'colorize'
-require './pixel'
+require 'console_splash/pixel'
 
 class ConsoleSplash
 

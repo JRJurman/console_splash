@@ -1,7 +1,7 @@
 = console_splash
 
 Console Splash is a ruby gem that allows you to have a vim-esq splash screen before
-your ruby program. It right now does not support color (but is planning on it in the near future using colorize). It uses the command line tool stty to get the size of the console, but you can define your own console size.
+your ruby program. It uses the command line tool stty to get the size of the console, but you can define your own console size.
 
 == Setup
 
@@ -53,3 +53,26 @@ You're in charge of holding it there, so call the gets method, or use the sleep 
     `clear`
     sleep(3) #=> holds the command line in place
     gets() #=> waits until user input
+
+== VERSION 2 - Now with Colorize!
+
+You can now add color by passing a table of symbols, the symbols for most operations use :fg (foreground color) and :bg (background color).
+    
+    splash.write_top_pattern("^", {:fg=>:white, :bg=>:green})
+
+For the write_line method, you can also pass at what position the line starts with the :start key
+
+    splash.write_line(0, "Hello World!", {:start => 10})
+
+There is now a write_pixel method, which takes in a line, column, and a single character, ( it also takes in a hash with the :fg and :bg keys ).
+
+    splash.write_pixel( 5, 5, "H" )
+
+Also included in the new version is a write_left and write_right method which act like the write_line method.
+
+    splash.write_right( 4, "Splash Screens" )
+
+For the write_header method, pass in the :nameFg and :nameBg to color the name line, :authorFg and :authorBg to color the author lines, and :versionFg and versionBg to color the version line.
+
+    splash.write_header("splash_console", "JRJurman", "2.0.0", {
+            :nameFg=>:red, :authorFg=>:green, :versionFg=>:yellow})
