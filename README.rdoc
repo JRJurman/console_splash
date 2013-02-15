@@ -13,7 +13,7 @@ To install console_splash, simply install using rubygems
 
 To use, first require the gem, and create a new splash object
 
-    require "console_splash"
+    require 'console_splash'
     splash = ConsoleSplash.new()
 
 The initializer can take in the number of lines and number of columns, but will autogenerate them with stty otherwise.
