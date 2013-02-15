@@ -8,5 +8,5 @@ Gem::Specification.new do |s|
   s.email         = "j.r.jurman@gmail.com"
   s.homepage      = "https://github.com/JRJurman/console_splash"
   s.files         = ["lib/console_splash.rb", "lib/pixel.rb"]
-  s.add_runtime_dependency = 'colorize' 
+  s.add_runtime_dependency 'colorize' 
 end
