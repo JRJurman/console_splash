@@ -20,7 +20,7 @@ The initializer can take in the number of lines and number of columns, but will 
 
     splash = ConsoleSplash.new(35, 88) #=> 35 lines, 88 columns
 
-After that, there are a series of methods you can use to setup the splash screen. .write_header takes in a name, author, and version to display program information.
+After that, there are a series of methods you can use to setup the splash screen. write_header takes in a name, author, and version to display program information.
 
     splash.write_header("ConsoleSplash", "JRJurman", "0.3.0")
 
@@ -68,11 +68,11 @@ There is now a write_pixel method, which takes in a line, column, and a single c
 
     splash.write_pixel( 5, 5, "H" )
 
-Also included in the new version is a write_left and write_right method which act like the write_line method.
+Also included in the new version is a write_left and write_right method which act like the write_center method.
 
     splash.write_right( 4, "Splash Screens" )
 
 For the write_header method, pass in the :nameFg and :nameBg to color the name line, :authorFg and :authorBg to color the author lines, and :versionFg and versionBg to color the version line.
 
-    splash.write_header("splash_console", "JRJurman", "2.0.0", {
-            :nameFg=>:red, :authorFg=>:green, :versionFg=>:yellow})
+    splash.write_header("splash_console", "JRJurman", "2.0.0", 
+            {:nameFg=>:red, :authorFg=>:green, :versionFg=>:yellow})
